@@ -400,6 +400,48 @@
     font-size: 12px;
   }
 
+  .cta-banner {
+    margin-top: 32px;
+    display: block;
+    text-decoration: none;
+    background: var(--accent);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    text-align: center;
+    transition: all var(--transition);
+    box-shadow: 0 2px 8px rgba(108, 63, 160, 0.2);
+  }
+
+  .cta-banner:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(108, 63, 160, 0.3);
+    text-decoration: none;
+  }
+
+  .cta-banner .cta-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 4px;
+  }
+
+  .cta-banner .cta-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+    font-weight: 400;
+  }
+
+  .cta-banner .cta-arrow {
+    display: inline-block;
+    margin-left: 6px;
+    transition: transform var(--transition);
+  }
+
+  .cta-banner:hover .cta-arrow {
+    transform: translateX(3px);
+  }
+
   .footer {
     margin-top: 40px;
     text-align: center;
@@ -688,14 +730,16 @@
     </div>
   </div>
 
+  <a href="about.html" class="cta-banner">
+    <div class="cta-title">Read the Full Framework &amp; Sources <span class="cta-arrow">&rarr;</span></div>
+    <div class="cta-desc">What every major platform requires, cross-platform comparison, worked examples, and all references.</div>
+  </a>
+
   <footer class="footer">
     <div style="max-width: 480px; margin: 0 auto 12px; line-height: 1.6;">
       This tool provides general guidance only, not legal advice. Each platform has its own AI disclosure rules. Always check the specific requirements of Apple Podcasts, Spotify, YouTube, and any other platform where you distribute your podcast.
     </div>
     <div>
-      <a href="about.html">Full Framework &amp; Sources</a>
-    </div>
-    <div style="margin-top: 8px;">
       Built by <a href="https://betella.net" target="_blank">Alberto Betella</a>
       <span class="sep">|</span>
       <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>
