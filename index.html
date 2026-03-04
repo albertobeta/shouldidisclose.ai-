@@ -795,30 +795,17 @@
 (function() {
   'use strict';
 
-  var totalDots = 6;
-  var visibleDots = 6;
-  var currentDot = 0;
-  var stepNumber = 0;
-
-  // Map question IDs to their dot index in the progress bar.
-  // Some paths skip questions, so we track which dot we're on.
+  // Fixed 6-dot progress bar. Each question has a fixed position.
+  // q0=0, q1=1, q2=2, q3=3, q4=4, q5=5
+  // Paths that skip questions just jump to the right dot position.
   var dotMap = { q0: 0, q1: 1, q2: 2, q3: 3, q4: 4, q5: 5 };
 
-  function setVisibleDots(count) {
-    visibleDots = count;
-    for (var i = 0; i < totalDots; i++) {
-      var dot = document.getElementById('dot' + i);
-      dot.style.display = i < visibleDots ? '' : 'none';
-    }
-  }
-
-  function updateProgress(activeDot) {
-    currentDot = activeDot;
-    for (var i = 0; i < visibleDots; i++) {
+  function updateProgress(dotIndex) {
+    for (var i = 0; i < 6; i++) {
       var dot = document.getElementById('dot' + i);
       dot.className = 'progress-dot';
-      if (i < currentDot) dot.className = 'progress-dot done';
-      if (i === currentDot) dot.className = 'progress-dot active';
+      if (i < dotIndex) dot.className = 'progress-dot done';
+      if (i === dotIndex) dot.className = 'progress-dot active';
     }
   }
 
@@ -831,11 +818,12 @@
 
   function showQuestion(id) {
     hideAll();
-    stepNumber++;
     var el = document.getElementById(id);
     el.classList.add('active');
+    var pos = dotMap[id] + 1; // 1-based position
     var label = el.querySelector('.step-label');
-    if (label) label.textContent = 'Question ' + stepNumber + ' of ' + visibleDots;
+    if (label) label.textContent = 'Question ' + pos + ' of 6';
+    document.getElementById('progressBar').style.display = 'flex';
     updateProgress(dotMap[id]);
   }
 
@@ -860,17 +848,12 @@
     // Q2: Did you clone your own voice?
     if (questionId === 'q1') {
       if (value) {
-        // Yes, cloned own voice -> ask about creative substance (3 questions total)
-        setVisibleDots(3);
+        // Yes, cloned own voice -> ask about creative substance
         showQuestion('q2');
       } else {
         // No cloning -> ask about AI-written script first
-        // Path: q4 (script) -> q3 (voice segments) -> q5 (production) = 5 questions total
-        setVisibleDots(5);
-        dotMap.q4 = 2;
-        dotMap.q3 = 3;
-        dotMap.q5 = 4;
-        showQuestion('q4');
+        // Path: q3 (voice segments) -> q4 (script) -> q5 (production)
+        showQuestion('q3');
       }
       return;
     }
@@ -878,10 +861,8 @@
     // Q3: (self-clone path) Did you write the script?
     if (questionId === 'q2') {
       if (value) {
-        // You wrote it -> no disclosure (your substance, AI delivery)
         showResult('resultNoClone');
       } else {
-        // AI wrote it -> disclose (AI did creative work + performance)
         showResult('resultDiscloseClone');
       }
       return;
@@ -892,7 +873,7 @@
       if (value) {
         showResult('resultDiscloseSegments');
       } else {
-        showQuestion('q5');
+        showQuestion('q4');
       }
       return;
     }
@@ -902,7 +883,7 @@
       if (value) {
         showResult('resultDiscloseScript');
       } else {
-        showQuestion('q3');
+        showQuestion('q5');
       }
       return;
     }
@@ -919,17 +900,11 @@
   };
 
   window.restart = function() {
-    // Reset dot map
-    dotMap = { q0: 0, q1: 1, q2: 2, q3: 3, q4: 4, q5: 5 };
-    stepNumber = 0;
-    setVisibleDots(6);
     document.getElementById('progressBar').style.display = 'flex';
     showQuestion('q0');
   };
 
-  // Initial state: show all 6 dots, step 0
-  stepNumber = 0;
-  setVisibleDots(6);
+  // Initial state
   showQuestion('q0');
 })();
 </script>
