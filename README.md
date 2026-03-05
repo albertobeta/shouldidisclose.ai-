@@ -1,6 +1,6 @@
-# shouldidisclose.ai
+# Should I Disclose AI in My Podcast?
 
-A decision tool and framework that helps podcasters determine whether their episodes need an AI disclosure label.
+A free decision tool and framework that helps podcasters determine whether their episodes need an AI disclosure label.
 
 **Live at: [shouldidisclose.ai](https://shouldidisclose.ai)**
 
