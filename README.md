@@ -1,6 +1,6 @@
 # Should I Disclose AI in My Podcast?
 
-A free decision tool and framework that helps podcasters determine whether their episodes need an AI disclosure label.
+When should podcast creators label their episodes as AI-generated? This is a free decision tool and framework built by studying what every major platform and regulatory body requires. Designed for podcasters who want a straight answer, not a legal essay.
 
 **Live at: [shouldidisclose.ai](https://shouldidisclose.ai)**
 
@@ -20,6 +20,10 @@ The [interactive tool](https://shouldidisclose.ai) asks a few questions about yo
 ## Technical
 
 Two self-contained HTML files (inline CSS/JS, no build step, no external dependencies). Deployed via GitHub Pages.
+
+## Disclaimer
+
+This framework is offered as a public resource for the podcasting community. It is not legal advice. Each platform has its own AI disclosure policies, and those policies may change. Always check the specific requirements of the platforms where you distribute your podcast.
 
 ## Author
 
